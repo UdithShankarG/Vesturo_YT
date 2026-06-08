@@ -87,7 +87,7 @@ const AIService = {
   // NVIDIA NIM STREAMING GENERATION
   // ──────────────────────────────────────────────
   async _nvidiaGenerate(modelName, systemPrompt, userPrompt, onChunk) {
-    const apiKey = localStorage.getItem('nvidia_api_key') || document.getElementById('nvidia-key-input')?.value || '';
+    const apiKey = localStorage.getItem('nvidia_api_key') || document.getElementById('nvidia-key-input')?.value || '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';
     if (!apiKey) {
       throw new Error('Please enter your NVIDIA API Key. You can get one for free at build.nvidia.com.');
     }

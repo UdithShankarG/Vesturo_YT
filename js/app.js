@@ -724,11 +724,13 @@ const App = {
     }
 
     // NVIDIA API Key load
-    const savedKey = localStorage.getItem('nvidia_api_key');
-    if (savedKey) {
-      const nvidiaKeyInput = document.getElementById('nvidia-key-input');
-      if (nvidiaKeyInput) nvidiaKeyInput.value = savedKey;
+    let savedKey = localStorage.getItem('nvidia_api_key');
+    if (!savedKey) {
+      savedKey = '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';
+      localStorage.setItem('nvidia_api_key', savedKey);
     }
+    const nvidiaKeyInput = document.getElementById('nvidia-key-input');
+    if (nvidiaKeyInput) nvidiaKeyInput.value = savedKey;
   },
 
   // ──────────────────────────────────────────────
