@@ -265,6 +265,7 @@ const VESTURO_DATA = {
     { id: "gpt-4o",              name: "GPT-4o",              provider: "OpenAI",     tier: "high",      desc: "Strong instruction following" },
     { id: "gemini-2.5-pro",      name: "Gemini 2.5 Pro",      provider: "Google",     tier: "high",      desc: "Excellent at detailed descriptions" },
     { id: "deepseek-r1",         name: "DeepSeek R1",         provider: "DeepSeek",   tier: "reasoning",  desc: "Strong reasoning model" },
+    { id: "nvidia/deepseek-ai/deepseek-v4-pro", name: "DeepSeek V4 Pro (NVIDIA NIM)", provider: "NVIDIA / DeepSeek", tier: "flagship", desc: "NVIDIA NIM Free API, ultra-detailed reasoning & coding" },
     { id: "llama-4-maverick",    name: "Llama 4 Maverick",    provider: "Meta",       tier: "creative",   desc: "Good for creative tasks" }
   ]
 };

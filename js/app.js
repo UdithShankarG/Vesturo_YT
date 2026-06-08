@@ -311,7 +311,16 @@ const App = {
     if (modelSelect) {
       modelSelect.addEventListener('change', (e) => {
         this.state.model = e.target.value;
+        this.toggleNvidiaKeyVisibility(e.target.value);
         this.saveState();
+      });
+    }
+
+    // Nvidia key input
+    const nvidiaKeyInput = document.getElementById('nvidia-key-input');
+    if (nvidiaKeyInput) {
+      nvidiaKeyInput.addEventListener('input', (e) => {
+        localStorage.setItem('nvidia_api_key', e.target.value);
       });
     }
 
@@ -365,6 +374,16 @@ const App = {
       // Focus the manual input
       const input = manualWrapper.querySelector('input');
       if (input) input.focus();
+    }
+  },
+
+  // ──────────────────────────────────────────────
+  // TOGGLE NVIDIA KEY VISIBILITY
+  // ──────────────────────────────────────────────
+  toggleNvidiaKeyVisibility(modelId) {
+    const keySection = document.getElementById('nvidia-key-section');
+    if (keySection) {
+      keySection.style.display = modelId && modelId.startsWith('nvidia/') ? 'block' : 'none';
     }
   },
 
@@ -701,6 +720,14 @@ const App = {
     if (model) {
       const modelSelect = document.getElementById('model-select');
       if (modelSelect) modelSelect.value = model;
+      this.toggleNvidiaKeyVisibility(model);
+    }
+
+    // NVIDIA API Key load
+    const savedKey = localStorage.getItem('nvidia_api_key');
+    if (savedKey) {
+      const nvidiaKeyInput = document.getElementById('nvidia-key-input');
+      if (nvidiaKeyInput) nvidiaKeyInput.value = savedKey;
     }
   },
 

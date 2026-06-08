@@ -27,18 +27,20 @@ VESTURO is a prompt engineering tool for the **Vesturo_Transformations** YouTube
 3. **Click "Generate Video Prompt"**
 4. **Copy the output** and paste into your video AI model
 
-## AI Models (via Puter.js)
+## AI Models
 
-All models are accessed through [Puter.js](https://developer.puter.com) — no API keys needed. You sign in with your Puter account.
+- **Standard Models (via Puter.js):** Accessed through [Puter.js](https://developer.puter.com) — no API keys needed. You sign in with your Puter account.
+- **DeepSeek V4 Pro (via NVIDIA NIM):** Accessed through [NVIDIA NIM](https://build.nvidia.com/) — requires a free developer API key from build.nvidia.com.
 
-| Model | Provider | Best For |
-|-------|----------|----------|
-| Claude Opus 4.8 | Anthropic | Complex prompt engineering (recommended) |
-| Claude Sonnet 4.6 | Anthropic | Fast + high quality daily use |
-| GPT-4o | OpenAI | Strong instruction following |
-| Gemini 2.5 Pro | Google | Detailed descriptions |
-| DeepSeek R1 | DeepSeek | Reasoning-heavy tasks |
-| Llama 4 Maverick | Meta | Creative tasks |
+| Model | Provider | Integration | Best For |
+|-------|----------|-------------|----------|
+| DeepSeek V4 Pro | NVIDIA / DeepSeek | NVIDIA NIM API (Free Key) | Ultra-detailed reasoning & coding |
+| Claude Opus 4.8 | Anthropic | Puter.js (Free Auth) | Complex prompt engineering (recommended) |
+| Claude Sonnet 4.6 | Anthropic | Puter.js (Free Auth) | Fast + high quality daily use |
+| GPT-4o | OpenAI | Puter.js (Free Auth) | Strong instruction following |
+| Gemini 2.5 Pro | Google | Puter.js (Free Auth) | Detailed descriptions |
+| DeepSeek R1 | DeepSeek | Puter.js (Free Auth) | Reasoning-heavy tasks |
+| Llama 4 Maverick | Meta | Puter.js (Free Auth) | Creative tasks |
 
 ## Enable GitHub Pages
 
