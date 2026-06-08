@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VESTURO — AI Video Prompt Generator</title>
+  <meta name="description" content="Generate hyper-detailed video prompts for mechanical prototype transformation shorts. Powered by AI.">
+  <meta name="author" content="Vesturo_Transformations">
+  <meta property="og:title" content="VESTURO — AI Video Prompt Generator">
+  <meta property="og:description" content="Generate hyper-detailed video prompts for mechanical prototype transformation shorts.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#050506">
+
+  <!-- Puter.js CDN -->
+  <script src="https://js.puter.com/v2/"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- ════════════════════════════════════════ -->
+    <!-- HEADER -->
+    <!-- ════════════════════════════════════════ -->
+    <header class="app-header">
+      <h1 class="app-logo">VESTUR<span>O</span></h1>
+      <p class="app-subtitle">Transformation Prompt Engine</p>
+      <hr class="header-line">
+    </header>
+
+    <!-- ════════════════════════════════════════ -->
+    <!-- STATUS BAR -->
+    <!-- ════════════════════════════════════════ -->
+    <div id="status-bar" class="status-bar">
+      <div class="spinner"></div>
+      <span class="status-text">Ready</span>
+    </div>
+
+    <!-- ════════════════════════════════════════ -->
+    <!-- 1. CATEGORY -->
+    <!-- ════════════════════════════════════════ -->
+    <div class="form-section">
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <label class="form-label" for="category-select">
+          <span class="label-number">1</span> Category
+        </label>
+        <button type="button" class="manual-toggle" id="category-manual-toggle">✎ Type manually</button>
+      </div>
+      <div id="category-select-wrapper" class="select-wrapper">
+        <select id="category-select" class="form-select">
+          <option value="" disabled selected>Select a category…</option>
+        </select>
+      </div>
+      <div id="category-manual-wrapper" class="manual-input-wrapper">
+        <input type="text" id="category-manual-input" class="form-input" placeholder="Type your category…">
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════ -->
+    <!-- 2. SUBJECT -->
+    <!-- ════════════════════════════════════════ -->
+    <div class="form-section" id="subject-section">
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <label class="form-label" for="subject-select">
+          <span class="label-number">2</span> Subject
+        </label>
+        <button type="button" class="manual-toggle" id="subject-manual-toggle">✎ Type manually</button>
+      </div>
+      <p class="form-sublabel">The real-world object that the abstract will transform into</p>
+      <div id="subject-select-wrapper" class="select-wrapper">
+        <select id="subject-select" class="form-select" disabled>
+          <option value="" disabled selected>Select category first…</option>
+        </select>
+      </div>
+      <div id="subject-manual-wrapper" class="manual-input-wrapper">
+        <input type="text" id="subject-manual-input" class="form-input" placeholder="Type your subject…">
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════ -->
+    <!-- 3. MATERIALS -->
+    <!-- ════════════════════════════════════════ -->
+    <div class="form-section">
+      <label class="form-label">
+        <span class="label-number">3</span> Metal &amp; Materials
+      </label>
+      <p class="form-sublabel">Select one or more metals for the prototype build</p>
+      <div id="metal-pills" class="pill-grid"></div>
+    </div>
+
+    <!-- ════════════════════════════════════════ -->
+    <!-- 4. COLOR / THEME -->
+    <!-- ════════════════════════════════════════ -->
+    <div class="form-section">
+      <label class="form-label" for="color-select">
+        <span class="label-number">4</span> Color &amp; Theme
+      </label>
+      <p class="form-sublabel">Color scheme applied to the mechanical prototype parts</p>
+      <select id="color-select" class="form-select">
+        <option value="" disabled selected>Select color theme…</option>
+      </select>
+      <div id="custom-color-wrapper" style="display: none; margin-top: 8px;">
+        <input type="text" id="custom-color-input" class="form-input" placeholder="Describe your custom color scheme…">
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════ -->
+    <!-- 5. ABSTRACT SHAPE -->
+    <!-- ════════════════════════════════════════ -->
+    <div class="form-section">
+      <label class="form-label">
+        <span class="label-number">5</span> Abstract Shape
+      </label>
+      <p class="form-sublabel">The folded compact form before deployment</p>
+      <div id="shape-grid" class="shape-grid"></div>
+    </div>
+
+    <!-- ════════════════════════════════════════ -->
+    <!-- 6. DEPLOYMENT MOVEMENTS -->
+    <!-- ════════════════════════════════════════ -->
+    <div class="form-section">
+      <label class="form-label">
+        <span class="label-number">6</span> Deployment Movements
+      </label>
+      <p class="form-sublabel">How the parts unfold and transform — select one or more styles</p>
+      <div id="movement-pills" class="pill-grid"></div>
+    </div>
+
+    <!-- ════════════════════════════════════════ -->
+    <!-- 7. PART COUNT -->
+    <!-- ════════════════════════════════════════ -->
+    <div class="form-section">
+      <label class="form-label">
+        <span class="label-number">7</span> Deployment Parts
+      </label>
+      <div class="range-wrapper">
+        <div class="range-display">
+          <span class="range-value" id="part-count-value">25</span>
+          <span class="range-bounds">5 — 80 parts</span>
+        </div>
+        <input type="range" id="part-count-slider" class="form-range"
+               min="5" max="80" step="1" value="25">
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════ -->
+    <!-- 8. TRANSFORMATION SPEED -->
+    <!-- ════════════════════════════════════════ -->
+    <div class="form-section">
+      <label class="form-label">
+        <span class="label-number">8</span> Transformation Speed
+      </label>
+      <p class="form-sublabel">Duration of the deployment sequence within the 10s video</p>
+      <div class="range-wrapper">
+        <div class="range-display">
+          <span class="range-value" id="speed-value">6.5s</span>
+          <span class="range-bounds">4.0s — 9.5s</span>
+        </div>
+        <input type="range" id="speed-slider" class="form-range"
+               min="4.0" max="9.5" step="0.5" value="6.5">
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════ -->
+    <!-- 9. AI MODEL -->
+    <!-- ════════════════════════════════════════ -->
+    <div class="form-section">
+      <label class="form-label" for="model-select">
+        <span class="label-number">9</span> AI Model
+      </label>
+      <p class="form-sublabel">Select the AI model to refine your prompt</p>
+      <select id="model-select" class="form-select"></select>
+    </div>
+
+    <!-- ════════════════════════════════════════ -->
+    <!-- GENERATE BUTTON -->
+    <!-- ════════════════════════════════════════ -->
+    <hr class="section-divider">
+
+    <button type="button" id="generate-btn" class="generate-btn">
+      ⚡ GENERATE VIDEO PROMPT
+    </button>
+
+    <!-- ════════════════════════════════════════ -->
+    <!-- OUTPUT AREA -->
+    <!-- ════════════════════════════════════════ -->
+    <div id="output-area" class="output-area">
+
+      <hr class="section-divider">
+
+      <!-- Copy All Bar -->
+      <div class="copy-all-bar">
+        <button type="button" class="copy-all-btn" data-copy-target="video-prompt">
+          📋 Copy Video Prompt
+        </button>
+        <button type="button" class="copy-all-btn" data-copy-target="master-prompt">
+          📋 Copy System Prompt
+        </button>
+        <button type="button" class="copy-all-btn" data-copy-target="all">
+          📋 Copy All
+        </button>
+      </div>
+
+      <!-- Video Prompt (Main Output) -->
+      <div class="output-section">
+        <div class="output-header">
+          <span class="output-title">Video Prompt</span>
+          <button type="button" class="copy-btn" data-copy-target="video-prompt">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy
+          </button>
+        </div>
+        <div id="video-prompt-content" class="output-content">
+          Prompt will appear here after generation…
+        </div>
+      </div>
+
+      <!-- First Frame -->
+      <div class="output-section">
+        <div class="collapsible-header" role="button" tabindex="0">
+          <span class="output-title">First Frame Description</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="collapsible-body">
+          <div id="first-frame-content" class="output-content" style="max-height: 300px;">—</div>
+        </div>
+      </div>
+
+      <!-- Timestamps -->
+      <div class="output-section">
+        <div class="collapsible-header" role="button" tabindex="0">
+          <span class="output-title">Timestamp Breakdown</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="collapsible-body">
+          <div id="timestamps-content">
+            <p style="color: var(--text-tertiary); font-size: 0.8rem;">Timestamps will appear here after generation.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Final Frame -->
+      <div class="output-section">
+        <div class="collapsible-header" role="button" tabindex="0">
+          <span class="output-title">Final Frame Description</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="collapsible-body">
+          <div id="final-frame-content" class="output-content" style="max-height: 300px;">—</div>
+        </div>
+      </div>
+
+      <!-- Sound Design -->
+      <div class="output-section">
+        <div class="collapsible-header" role="button" tabindex="0">
+          <span class="output-title">Sound Design</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="collapsible-body">
+          <div id="sound-design-content" class="output-content" style="max-height: 300px;">—</div>
+        </div>
+      </div>
+
+      <!-- Master/System Prompt -->
+      <div class="output-section">
+        <div class="collapsible-header" role="button" tabindex="0">
+          <span class="output-title">System Prompt (Master)</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="collapsible-body">
+          <div id="master-prompt-content" class="output-content mono" style="max-height: 400px;">—</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ════════════════════════════════════════ -->
+    <!-- FOOTER -->
+    <!-- ════════════════════════════════════════ -->
+    <footer class="app-footer">
+      <p class="footer-text">
+        VESTURO Transformations &middot; AI-Powered Prompt Engine
+        <br>
+        Built with <a href="https://developer.puter.com" target="_blank" rel="noopener">Puter.js</a>
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- Scripts (order matters) -->
+  <script src="js/data.js"></script>
+  <script src="js/prompt-engine.js"></script>
+  <script src="js/ai-service.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
